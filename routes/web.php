@@ -21,6 +21,12 @@ Route::post('/home/create','homeController@register');
 
 Route::get('/home/employee_list','homeController@employee_list');
 
+Route::get('/home/edit/{id}','homeController@edit_employee_list');
+Route::post('/home/edit/{id}','homeController@edit_employee_list_p');
+
+Route::get('/home/delete/{id}','homeController@delete_employee_list');
+Route::post('/home/delete/{id}','homeController@delete_employee_list_p');
+
 Route::get('/employee','employeeController@index');
 
 

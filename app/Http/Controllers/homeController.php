@@ -68,4 +68,59 @@ class homeController extends Controller
 
 
     }
+
+    public function edit_employee_list(Request $req, $id){
+        $username=$req->session()->get('username');
+        $user=User::where('username',$username)
+                    ->where('type','admin')
+                    ->first();
+        if($user!=NULL){
+            $employee=User::where('id',$id)->first();
+            return view('Admin.edit_employee')->with('employee',$employee);
+        }
+        else{
+            $req->session()->flash('msg','invalid request');
+            return redirect('/');
+        }
+
+    }
+
+    public function edit_employee_list_p(EmployeeRequest $req, $id){
+        $user = User::find($id);
+
+        $user->name= $req->name;
+        $user->company_name=$req->company_name;
+        $user->username=$req->username;
+        $user->phone=$req->phone;
+        $user->password=$req->password;
+        $user->updated_at=date("d/m/y");
+
+        if($user->save()){
+            return redirect('/home/employee_list');
+        }
+    }
+    // Delete employee Page
+    public function delete_employee_list(Request $req, $id){
+
+        $username=$req->session()->get('username');
+        $user=User::where('username',$username)
+                    ->where('type','admin')
+                    ->first();
+        if($user!=NULL){
+            $employee=User::where('id',$id)->first();
+            return view('Admin.delete')->with('employee',$employee);
+        }
+        else{
+            $req->session()->flash('msg','invalid request');
+            return redirect('/');
+        }
+
+
+    }
+    // Delete employee Post
+    public function delete_employee_list_p($id){
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/home/employee_list');
+    }
 }
