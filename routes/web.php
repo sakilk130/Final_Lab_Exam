@@ -27,6 +27,12 @@ Route::post('/home/edit/{id}','homeController@edit_employee_list_p');
 Route::get('/home/delete/{id}','homeController@delete_employee_list');
 Route::post('/home/delete/{id}','homeController@delete_employee_list_p');
 
+Route::get('/logout','logoutController@logout');
+
 Route::get('/employee','employeeController@index');
 
+Route::get('/employee/create_job','employeeController@create');
+Route::post('/employee/create_job','employeeController@create_p');
+
+Route::get('/employee/job_list','employeeController@job_list');
 
