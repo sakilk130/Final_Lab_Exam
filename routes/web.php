@@ -16,4 +16,11 @@ Route::post('/','loginController@verify');
 
 Route::get('/home','homeController@index');
 
+Route::get('/home/create','homeController@create');
+Route::post('/home/create','homeController@register');
+
+Route::get('/home/employee_list','homeController@employee_list');
+
 Route::get('/employee','employeeController@index');
+
+
