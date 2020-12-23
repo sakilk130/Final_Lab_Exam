@@ -36,3 +36,8 @@ Route::post('/employee/create_job','employeeController@create_p');
 
 Route::get('/employee/job_list','employeeController@job_list');
 
+Route::get('/employee/edit_job/{id}','employeeController@edit_job');
+Route::post('/employee/edit_job/{id}','employeeController@edit_job_p');
+
+Route::get('/employee/delete_job/{id}','employeeController@delete_job');
+Route::post('/employee/delete_job/{id}','employeeController@delete_job_p');

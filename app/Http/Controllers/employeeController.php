@@ -80,4 +80,62 @@ class employeeController extends Controller
             return redirect('/');
         }
     }
+
+    // Edit Job
+    public function edit_job(Request $req, $id){
+        $username=$req->session()->get('username');
+
+        $user=User::where('username',$username)
+                    ->where('type','employee')
+                    ->first();
+
+        if($user!=NULL){
+            $job=Job::where('id',$id)->first();
+            return view('employee.edit_job')->with('job',$job);
+        }
+        else{
+            $req->session()->flash('msg','invalid request');
+            return redirect('/');
+        }
+
+    }
+    // Edit Job
+    public function edit_job_p(JobRequest $req, $id){
+        $job = Job::find($id);
+
+        $job->company_name= $req->company_name;
+        $job->job=$req->job;
+        $job->location=$req->location;
+        $job->salary=$req->salary;
+        $job->updated_at=date("d/m/y");
+
+        if($job->save()){
+            return redirect('/employee/job_list');
+        }
+    }
+
+    // Delete
+    public function delete_job(Request $req, $id){
+        $username=$req->session()->get('username');
+
+        $user=User::where('username',$username)
+                    ->where('type','employee')
+                    ->first();
+
+        if($user!=NULL){
+            $job=Job::where('id',$id)->first();
+            return view('employee.delete_job')->with('job',$job);
+        }
+        else{
+            $req->session()->flash('msg','invalid request');
+            return redirect('/');
+        }
+
+
+    }
+    public function delete_job_p($id){
+        $job = Job::find($id);
+        $job->delete();
+        return redirect('/employee/job_list');
+    }
 }
