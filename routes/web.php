@@ -41,3 +41,6 @@ Route::post('/employee/edit_job/{id}','employeeController@edit_job_p');
 
 Route::get('/employee/delete_job/{id}','employeeController@delete_job');
 Route::post('/employee/delete_job/{id}','employeeController@delete_job_p');
+
+Route::post('/home/search_employee','homeController@search_employee');
+

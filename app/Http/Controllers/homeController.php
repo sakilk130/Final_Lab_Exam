@@ -123,4 +123,8 @@ class homeController extends Controller
         $user->delete();
         return redirect('/home/employee_list');
     }
+    public function search_employee(Request $req){
+        $lists=User::where('name','like','%' .$req->get('searchQuery') . '%')->where('type','employee')->get();
+        return json_encode($lists);
+    }
 }
